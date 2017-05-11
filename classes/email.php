@@ -139,7 +139,19 @@ class Email {
 			$message->setFrom($from[0], $from[1]);
 		}
 
-		return Email::$mail->send($message);
+		$attempts = 0;
+
+		do {
+			try {
+				return Email::$mail->send($message);
+			} catch (Exception $e) {
+				$attempts++;
+				Email::$mail->getTransport()->stop();
+				Email::$mail->send($message);
+			}
+		} while ($attempts < 3)
+
+		return null;
 	}
 
 } // End email
