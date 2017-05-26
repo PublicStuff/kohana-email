@@ -147,7 +147,6 @@ class Email {
 			} catch (Exception $e) {
 				$attempts++;
 				Email::$mail->getTransport()->stop();
-				Email::$mail->send($message);
 			}
 		} while ($attempts < 3)
 
