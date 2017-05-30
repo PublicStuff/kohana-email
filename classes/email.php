@@ -148,7 +148,7 @@ class Email {
 				$attempts++;
 				Email::$mail->getTransport()->stop();
 			}
-		} while ($attempts < 3)
+		} while ($attempts < 3);
 
 		return null;
 	}
